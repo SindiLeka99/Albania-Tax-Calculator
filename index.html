@@ -209,26 +209,65 @@
             let inputAmount = parseFloat(grossSalary) || 0;
             let monthlyGross = period === 'annual' ? inputAmount / 12 : inputAmount;
             
-            const contributionBase = monthlyGross;
-            const employeeSocialSecurity = contributionBase * 0.095;
-            const employeeHealth = contributionBase * 0.017;
+            // Use thresholds based on selected currency
+            let minSocialSecurityBase, maxSocialSecurityBase, taxThreshold1, taxThreshold2, taxThreshold3, deduction1, deduction2;
+            
+            if (currency === 'ALL') {
+              minSocialSecurityBase = 50000;
+              maxSocialSecurityBase = 186416;
+              taxThreshold1 = 50000;
+              taxThreshold2 = 60000;
+              taxThreshold3 = 170000;
+              deduction1 = 35000;
+              deduction2 = 30000;
+            } else if (currency === 'EUR') {
+              minSocialSecurityBase = 460;
+              maxSocialSecurityBase = 1720;
+              taxThreshold1 = 460;
+              taxThreshold2 = 553;
+              taxThreshold3 = 1567;
+              deduction1 = 323;
+              deduction2 = 277;
+            } else { // USD
+              minSocialSecurityBase = 518;
+              maxSocialSecurityBase = 1932;
+              taxThreshold1 = 518;
+              taxThreshold2 = 622;
+              taxThreshold3 = 1762;
+              deduction1 = 363;
+              deduction2 = 311;
+            }
+            
+            // Social security base calculation
+            let socialSecurityBase;
+            if (monthlyGross <= minSocialSecurityBase) {
+              socialSecurityBase = minSocialSecurityBase;
+            } else if (monthlyGross >= maxSocialSecurityBase) {
+              socialSecurityBase = maxSocialSecurityBase;
+            } else {
+              socialSecurityBase = monthlyGross;
+            }
+            
+            const employeeSocialSecurity = socialSecurityBase * 0.095;
+            const employeeHealth = monthlyGross * 0.017;
             const totalEmployeeContributions = employeeSocialSecurity + employeeHealth;
-            const employerSocialSecurity = contributionBase * 0.15;
-            const employerHealth = contributionBase * 0.017;
+            
+            const employerSocialSecurity = socialSecurityBase * 0.15;
+            const employerHealth = monthlyGross * 0.017;
             const totalEmployerContributions = employerSocialSecurity + employerHealth;
+            
             const taxableIncome = monthlyGross - totalEmployeeContributions;
             
+            // Income tax calculation
             let incomeTax = 0;
-            if (taxableIncome <= 50000) {
+            if (taxableIncome <= taxThreshold1) {
               incomeTax = 0;
-            } else if (taxableIncome <= 60000) {
-              incomeTax = (taxableIncome - 35000) * 0.13;
+            } else if (taxableIncome <= taxThreshold2) {
+              incomeTax = (taxableIncome - deduction1) * 0.13;
+            } else if (taxableIncome <= taxThreshold3) {
+              incomeTax = (taxableIncome - deduction2) * 0.13;
             } else {
-              if (taxableIncome <= 200000) {
-                incomeTax = (taxableIncome - 30000) * 0.13;
-              } else {
-                incomeTax = ((200000 - 30000) * 0.13) + ((taxableIncome - 200000) * 0.23);
-              }
+              incomeTax = ((taxThreshold3 - deduction2) * 0.13) + ((taxableIncome - taxThreshold3) * 0.23);
             }
             
             const netSalary = taxableIncome - incomeTax;
@@ -671,4 +710,3 @@
     </script>
 </body>
 </html>
-
