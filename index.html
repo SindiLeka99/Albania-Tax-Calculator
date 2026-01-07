@@ -64,19 +64,22 @@
             companyDetails: "Company Details",
             annualRevenue: "Annual Revenue",
             annualExpenses: "Annual Expenses",
+            adjustments: "Tax Adjustments",
             industrySector: "Industry / Sector",
             corporateTax: "Corporate Tax",
-            taxOnProfit: "Tax on net profit (revenue - expenses)",
+            taxOnProfit: "Tax on taxable profit (revenue - expenses ± adjustments)",
             netProfit: "Net Profit (After Tax)",
             taxRate: "Tax Rate",
             effectiveRate: "Effective Rate",
             totalRevenue: "Total Revenue",
             totalExpenses: "Total Expenses",
+            totalAdjustments: "Tax Adjustments",
             grossProfit: "Gross Profit",
+            taxableProfit: "Taxable Profit",
             taxCalculation: "Tax Calculation Breakdown",
             industry: "Industry",
-            taxableProfit: "Taxable Profit",
             revenueMinusExpenses: "Revenue - Expenses",
+            plusAdjustments: "± Tax Adjustments",
             ofProfit: "of profit",
             afterTax: "After Tax",
             corporateTaxRates: "Albania Corporate Tax Rates 2026",
@@ -89,22 +92,32 @@
             automotiveRate: "🚗 Automotive Industry: 5%",
             automotiveDesc: "Until Dec 31, 2029",
             smallBusinessRate: "💼 Small Business: 0%",
-            smallBusinessDesc: "Annual income below 14 million ALL until Dec 31, 2029",
+            smallBusinessDesc: "Annual income 0-14 million ALL until Dec 31, 2029",
+            mediumBusinessRate: "💼 Medium Business: 15%",
+            mediumBusinessDesc: "Annual income over 14 million ALL",
+            selfEmployedSmallRate: "👤 Self-Employed / Individual Trader: 15%",
+            selfEmployedSmallDesc: "Neni 24: Annual income 0-14 million ALL",
+            selfEmployedLargeRate: "👤 Self-Employed / Individual Trader: 23%",
+            selfEmployedLargeDesc: "Neni 24: Annual income over 14 million ALL",
             luxuryHotelRate: "🏨 Luxury Hotels: 0%",
             luxuryHotelDesc: "4-5 star hotels with international brand status for 10 years",
             itNotice: "⚠️ Important Notice for IT Sector:",
-            itNoticeText: "From January 1, 2026, IT companies now pay standard 15% corporate tax (increased from 5%). This change generates an additional 523 million lekë in government revenue.",
-            affectedBusinesses: "Affected businesses:",
-            itCompanies: "3,574 IT service companies + 556 information service companies in Albania.",
+            itNoticeText: "From January 1, 2026, IT companies now pay standard 15% corporate tax (increased from 5%).",
             disclaimer: "This calculator uses 2026 Albania tax rates.",
             officialInfo: "For official information, consult the Albanian Tax Administration.",
+            adjustmentsInfo: "Enter positive values to increase taxable profit or negative values to decrease it",
+            socialSecurityBase: "Social Security Base",
+            socialSecurityInfo: "Social security (9.5%) is calculated on a base amount determined by your gross salary",
             industries: {
               standard: { name: 'Standard Business', description: 'Most businesses (retail, manufacturing, services, etc.)' },
               it: { name: 'IT / Software Development', description: '15% from January 1, 2026 (changed from 5%)' },
               agriculture: { name: 'Agricultural Cooperatives', description: '5% until Dec 31, 2029' },
               agritourism: { name: 'Agritourism (Certified)', description: '5% until Dec 31, 2029' },
               automotive: { name: 'Automotive Industry', description: '5% until Dec 31, 2029' },
-              smallbusiness: { name: 'Small Business (< 14M ALL/year)', description: '0% until Dec 31, 2029' },
+              smallbusiness: { name: 'Small Business (0-14M ALL/year)', description: '0% until Dec 31, 2029' },
+              mediumbusiness: { name: 'Medium Business (>14M ALL/year)', description: '15% until Dec 31, 2029' },
+              'selfemployed-small': { name: 'Self-Employed / Individual Trader (0-14M ALL/year)', description: 'Neni 24: 15% until Dec 31, 2029' },
+              'selfemployed-large': { name: 'Self-Employed / Individual Trader (>14M ALL/year)', description: 'Neni 24: 23% until Dec 31, 2029' },
               'luxury-hotel': { name: '4-5 Star Hotels (International Brand)', description: '0% for 10 years (special status)' }
             }
           },
@@ -135,19 +148,22 @@
             companyDetails: "Detajet e Kompanisë",
             annualRevenue: "Të Ardhura Vjetore",
             annualExpenses: "Shpenzime Vjetore",
+            adjustments: "Korrigjime Tatimore",
             industrySector: "Industria / Sektori",
             corporateTax: "Tatimi mbi Fitimin",
-            taxOnProfit: "Tatimi mbi fitimin neto (të ardhura - shpenzime)",
+            taxOnProfit: "Tatimi mbi fitimin e tatueshëm (të ardhura - shpenzime ± korrigjime)",
             netProfit: "Fitimi Neto (Pas Tatimit)",
             taxRate: "Norma e Tatimit",
             effectiveRate: "Norma Efektive",
             totalRevenue: "Të Ardhura Totale",
             totalExpenses: "Shpenzime Totale",
+            totalAdjustments: "Korrigjime Tatimore",
             grossProfit: "Fitimi Bruto",
+            taxableProfit: "Fitimi i Tatueshëm",
             taxCalculation: "Ndarje e Llogaritjes së Tatimit",
             industry: "Industria",
-            taxableProfit: "Fitimi i Tatueshëm",
             revenueMinusExpenses: "Të Ardhura - Shpenzime",
+            plusAdjustments: "± Korrigjime Tatimore",
             ofProfit: "e fitimit",
             afterTax: "Pas Tatimit",
             corporateTaxRates: "Normat e Tatimit mbi Fitimin në Shqipëri 2026",
@@ -160,22 +176,32 @@
             automotiveRate: "🚗 Industria Automobilistike: 5%",
             automotiveDesc: "Deri më 31 Dhjetor 2029",
             smallBusinessRate: "💼 Biznes i Vogël: 0%",
-            smallBusinessDesc: "Të ardhura vjetore nën 14 milionë Lekë deri më 31 Dhjetor 2029",
+            smallBusinessDesc: "Të ardhura vjetore 0-14 milionë Lekë deri më 31 Dhjetor 2029",
+            mediumBusinessRate: "💼 Biznes i Mesëm: 15%",
+            mediumBusinessDesc: "Të ardhura vjetore mbi 14 milionë Lekë",
+            selfEmployedSmallRate: "👤 Vetëpunësim / Individ Tregtar: 15%",
+            selfEmployedSmallDesc: "Neni 24: Të ardhura vjetore 0-14 milionë Lekë",
+            selfEmployedLargeRate: "👤 Vetëpunësim / Individ Tregtar: 23%",
+            selfEmployedLargeDesc: "Neni 24: Të ardhura vjetore mbi 14 milionë Lekë",
             luxuryHotelRate: "🏨 Hotele Luksoze: 0%",
             luxuryHotelDesc: "Hotele 4-5 yje me status ndërkombëtar për 10 vjet",
             itNotice: "⚠️ Njoftim i Rëndësishëm për Sektorin IT:",
-            itNoticeText: "Nga 1 Janari 2026, kompanitë IT paguajnë tani taksë standarde 15% mbi fitimin (rritur nga 5%). Ky ndryshim gjeneron 523 milionë lekë të ardhura shtesë për qeverinë.",
-            affectedBusinesses: "Biznese të prekura:",
-            itCompanies: "3,574 kompani shërbimesh IT + 556 kompani shërbimesh informacioni në Shqipëri.",
+            itNoticeText: "Nga 1 Janari 2026, kompanitë IT paguajnë tani taksë standarde 15% mbi fitimin (rritur nga 5%).",
             disclaimer: "Ky kalkulator përdor normat e taksave të Shqipërisë për 2026.",
             officialInfo: "Për informacion zyrtar, konsultohuni me Administratën Tatimore Shqiptare.",
+            adjustmentsInfo: "Vendosni vlera pozitive për të rritur fitimin e tatueshëm ose negative për ta ulur",
+            socialSecurityBase: "Baza e Sigurimit Shoqëror",
+            socialSecurityInfo: "Sigurimi shoqëror (9.5%) llogaritet mbi një bazë që përcaktohet nga paga juaj bruto",
             industries: {
               standard: { name: 'Biznes Standard', description: 'Shumica e bizneseve (shitje me pakicë, prodhim, shërbime, etj.)' },
               it: { name: 'IT / Zhvillim Software', description: '15% nga 1 Janar 2026 (ndryshuar nga 5%)' },
               agriculture: { name: 'Kooperativa Bujqësore', description: '5% deri më 31 Dhjetor 2029' },
               agritourism: { name: 'Agroturizëm (i Certifikuar)', description: '5% deri më 31 Dhjetor 2029' },
               automotive: { name: 'Industria Automobilistike', description: '5% deri më 31 Dhjetor 2029' },
-              smallbusiness: { name: 'Biznes i Vogël (< 14M Lekë/vit)', description: '0% deri më 31 Dhjetor 2029' },
+              smallbusiness: { name: 'Biznes i Vogël (0-14M Lekë/vit)', description: '0% deri më 31 Dhjetor 2029' },
+              mediumbusiness: { name: 'Biznes i Mesëm (>14M Lekë/vit)', description: '15% deri më 31 Dhjetor 2029' },
+              'selfemployed-small': { name: 'Vetëpunësim / Individ Tregtar (0-14M Lekë/vit)', description: 'Neni 24: 15% deri më 31 Dhjetor 2029' },
+              'selfemployed-large': { name: 'Vetëpunësim / Individ Tregtar (>14M Lekë/vit)', description: 'Neni 24: 23% deri më 31 Dhjetor 2029' },
               'luxury-hotel': { name: 'Hotele 4-5 Yje (Brand Ndërkombëtar)', description: '0% për 10 vjet (status i veçantë)' }
             }
           }
@@ -190,6 +216,7 @@
           const [showBreakdown, setShowBreakdown] = useState(true);
           const [companyRevenue, setCompanyRevenue] = useState('10000000');
           const [companyExpenses, setCompanyExpenses] = useState('7000000');
+          const [companyAdjustments, setCompanyAdjustments] = useState('0');
           const [companyIndustry, setCompanyIndustry] = useState('standard');
           const [companyCurrency, setCompanyCurrency] = useState('ALL');
 
@@ -202,6 +229,9 @@
             'agritourism': { rate: 0.05 },
             'automotive': { rate: 0.05 },
             'smallbusiness': { rate: 0 },
+            'mediumbusiness': { rate: 0.15 },
+            'selfemployed-small': { rate: 0.15 },
+            'selfemployed-large': { rate: 0.23 },
             'luxury-hotel': { rate: 0 }
           };
 
@@ -209,47 +239,33 @@
             let inputAmount = parseFloat(grossSalary) || 0;
             let monthlyGross = period === 'annual' ? inputAmount / 12 : inputAmount;
             
-            // Use thresholds based on selected currency
-            let minSocialSecurityBase, maxSocialSecurityBase, taxThreshold1, taxThreshold2, taxThreshold3, deduction1, deduction2;
-            
+            let minBracket, maxBracket, incomeTaxBracket;
             if (currency === 'ALL') {
-              minSocialSecurityBase = 50000;
-              maxSocialSecurityBase = 186416;
-              taxThreshold1 = 50000;
-              taxThreshold2 = 60000;
-              taxThreshold3 = 170000;
-              deduction1 = 35000;
-              deduction2 = 30000;
+              minBracket = 50000;
+              maxBracket = 186416;
+              incomeTaxBracket = 170000;
             } else if (currency === 'EUR') {
-              minSocialSecurityBase = 460;
-              maxSocialSecurityBase = 1720;
-              taxThreshold1 = 460;
-              taxThreshold2 = 553;
-              taxThreshold3 = 1567;
-              deduction1 = 323;
-              deduction2 = 277;
+              minBracket = 400;
+              maxBracket = 1500;
+              incomeTaxBracket = 1400;
             } else { // USD
-              minSocialSecurityBase = 518;
-              maxSocialSecurityBase = 1932;
-              taxThreshold1 = 518;
-              taxThreshold2 = 622;
-              taxThreshold3 = 1762;
-              deduction1 = 363;
-              deduction2 = 311;
+              minBracket = 450;
+              maxBracket = 1650;
+              incomeTaxBracket = 1550;
             }
             
-            // Social security base calculation
+            const employeeHealth = monthlyGross * 0.017;
+            
             let socialSecurityBase;
-            if (monthlyGross <= minSocialSecurityBase) {
-              socialSecurityBase = minSocialSecurityBase;
-            } else if (monthlyGross >= maxSocialSecurityBase) {
-              socialSecurityBase = maxSocialSecurityBase;
+            if (monthlyGross <= minBracket) {
+              socialSecurityBase = minBracket;
+            } else if (monthlyGross >= maxBracket) {
+              socialSecurityBase = maxBracket;
             } else {
               socialSecurityBase = monthlyGross;
             }
-            
             const employeeSocialSecurity = socialSecurityBase * 0.095;
-            const employeeHealth = monthlyGross * 0.017;
+            
             const totalEmployeeContributions = employeeSocialSecurity + employeeHealth;
             
             const employerSocialSecurity = socialSecurityBase * 0.15;
@@ -258,16 +274,11 @@
             
             const taxableIncome = monthlyGross - totalEmployeeContributions;
             
-            // Income tax calculation
             let incomeTax = 0;
-            if (taxableIncome <= taxThreshold1) {
-              incomeTax = 0;
-            } else if (taxableIncome <= taxThreshold2) {
-              incomeTax = (taxableIncome - deduction1) * 0.13;
-            } else if (taxableIncome <= taxThreshold3) {
-              incomeTax = (taxableIncome - deduction2) * 0.13;
+            if (taxableIncome <= incomeTaxBracket) {
+              incomeTax = taxableIncome * 0.13;
             } else {
-              incomeTax = ((taxThreshold3 - deduction2) * 0.13) + ((taxableIncome - taxThreshold3) * 0.23);
+              incomeTax = (incomeTaxBracket * 0.13) + ((taxableIncome - incomeTaxBracket) * 0.23);
             }
             
             const netSalary = taxableIncome - incomeTax;
@@ -278,6 +289,7 @@
                 gross: monthlyGross,
                 employeeSocialSecurity,
                 employeeHealth,
+                socialSecurityBase,
                 totalEmployeeContributions,
                 incomeTax,
                 net: netSalary,
@@ -297,20 +309,24 @@
           const calculateCompanyTax = () => {
             const revenue = parseFloat(companyRevenue) || 0;
             const expenses = parseFloat(companyExpenses) || 0;
-            const profit = revenue - expenses;
+            const adjustments = parseFloat(companyAdjustments) || 0;
+            const grossProfit = revenue - expenses;
+            const taxableProfit = grossProfit + adjustments;
             
             const taxRate = industries[companyIndustry].rate;
-            const corporateTax = profit > 0 ? profit * taxRate : 0;
-            const netProfit = profit - corporateTax;
+            const corporateTax = taxableProfit > 0 ? taxableProfit * taxRate : 0;
+            const netProfit = taxableProfit - corporateTax;
             
             return {
               revenue,
               expenses,
-              profit,
+              adjustments,
+              grossProfit,
+              taxableProfit,
               corporateTax,
               netProfit,
               taxRate: taxRate * 100,
-              effectiveRate: profit > 0 ? (corporateTax / profit) * 100 : 0
+              effectiveRate: taxableProfit > 0 ? (corporateTax / taxableProfit) * 100 : 0
             };
           };
 
@@ -429,9 +445,9 @@
                             <div className="text-sm text-custom-green">
                               <p className="font-semibold mb-1">{t.taxRates}</p>
                               <ul className="space-y-1 text-xs">
-                                <li>• {t.socialSecurity}: 9.5%</li>
                                 <li>• {t.healthInsurance}: 1.7%</li>
-                                <li>• {t.incomeTax}: 0%, 13%, {language === 'sq' ? 'ose' : 'or'} 23%</li>
+                                <li>• {t.socialSecurity}: 9.5% (bracket-based)</li>
+                                <li>• {t.incomeTax}: 13%, 23%</li>
                               </ul>
                             </div>
                           </div>
@@ -486,8 +502,18 @@
                           <div className="divide-y divide-gray-200">
                             <div className="px-6 py-4 flex justify-between items-center">
                               <div>
+                                <div className="font-medium text-custom-grey">{t.healthInsurance}</div>
+                                <div className="text-sm text-gray-500">1.7% of gross salary</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="font-bold text-custom-grey">{formatCurrency(individualResults.monthly.employeeHealth)}</div>
+                              </div>
+                            </div>
+                            <div className="px-6 py-4 flex justify-between items-center bg-blue-50">
+                              <div>
                                 <div className="font-medium text-custom-grey">{t.socialSecurity}</div>
-                                <div className="text-sm text-gray-500">9.5%</div>
+                                <div className="text-sm text-gray-500">9.5% of {formatCurrency(individualResults.monthly.socialSecurityBase)}</div>
+                                <div className="text-xs text-gray-400 mt-1">{t.socialSecurityInfo}</div>
                               </div>
                               <div className="text-right">
                                 <div className="font-bold text-custom-grey">{formatCurrency(individualResults.monthly.employeeSocialSecurity)}</div>
@@ -495,17 +521,8 @@
                             </div>
                             <div className="px-6 py-4 flex justify-between items-center">
                               <div>
-                                <div className="font-medium text-custom-grey">{t.healthInsurance}</div>
-                                <div className="text-sm text-gray-500">1.7%</div>
-                              </div>
-                              <div className="text-right">
-                                <div className="font-bold text-custom-grey">{formatCurrency(individualResults.monthly.employeeHealth)}</div>
-                              </div>
-                            </div>
-                            <div className="px-6 py-4 flex justify-between items-center">
-                              <div>
                                 <div className="font-medium text-custom-grey">{t.incomeTax}</div>
-                                <div className="text-sm text-gray-500">{t.progressive}</div>
+                                <div className="text-sm text-gray-500">{t.progressive}: 13% (0-170K) / 23% (>170K)</div>
                               </div>
                               <div className="text-right">
                                 <div className="font-bold text-custom-grey">{formatCurrency(individualResults.monthly.incomeTax)}</div>
@@ -554,6 +571,15 @@
                         </div>
 
                         <div className="mb-6">
+                          <label className="block text-sm font-semibold text-custom-grey mb-2">{t.adjustments}</label>
+                          <div className="relative">
+                            <input type="number" value={companyAdjustments} onChange={(e) => setCompanyAdjustments(e.target.value)} className="w-full px-4 py-3 pr-16 border-2 border-custom-grey rounded-lg focus:border-custom-green focus:outline-none text-lg font-semibold" placeholder="0" />
+                            <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-custom-grey font-medium">{companyCurrency}</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-2">{t.adjustmentsInfo}</p>
+                        </div>
+
+                        <div className="mb-6">
                           <label className="block text-sm font-semibold text-custom-grey mb-2">{t.industrySector}</label>
                           <select value={companyIndustry} onChange={(e) => setCompanyIndustry(e.target.value)} className="w-full px-4 py-3 border-2 border-custom-grey rounded-lg focus:border-custom-green focus:outline-none text-base font-medium bg-white">
                             {Object.keys(industries).map((key) => (
@@ -596,7 +622,7 @@
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-3 gap-4">
+                      <div className="grid md:grid-cols-2 gap-4">
                         <div className="bg-white rounded-lg shadow p-5 border-l-4 border-green-500">
                           <div className="text-sm text-custom-grey mb-1">{t.totalRevenue}</div>
                           <div className="text-2xl font-bold text-custom-grey">{formatCurrency(companyResults.revenue, companyCurrency)}</div>
@@ -605,9 +631,13 @@
                           <div className="text-sm text-custom-grey mb-1">{t.totalExpenses}</div>
                           <div className="text-2xl font-bold text-custom-grey">{formatCurrency(companyResults.expenses, companyCurrency)}</div>
                         </div>
+                        <div className="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
+                          <div className="text-sm text-custom-grey mb-1">{t.totalAdjustments}</div>
+                          <div className="text-2xl font-bold text-custom-grey">{formatCurrency(companyResults.adjustments, companyCurrency)}</div>
+                        </div>
                         <div className="bg-white rounded-lg shadow p-5 border-l-4 border-custom-green">
                           <div className="text-sm text-custom-grey mb-1">{t.grossProfit}</div>
-                          <div className="text-2xl font-bold text-custom-grey">{formatCurrency(companyResults.profit, companyCurrency)}</div>
+                          <div className="text-2xl font-bold text-custom-grey">{formatCurrency(companyResults.grossProfit, companyCurrency)}</div>
                         </div>
                       </div>
 
@@ -625,11 +655,29 @@
                           </div>
                           <div className="px-6 py-4 flex justify-between items-center">
                             <div>
-                              <div className="font-medium text-custom-grey">{t.taxableProfit}</div>
+                              <div className="font-medium text-custom-grey">{t.grossProfit}</div>
                               <div className="text-sm text-gray-500">{t.revenueMinusExpenses}</div>
                             </div>
                             <div className="text-right">
-                              <div className="font-bold text-custom-grey">{formatCurrency(companyResults.profit, companyCurrency)}</div>
+                              <div className="font-bold text-custom-grey">{formatCurrency(companyResults.grossProfit, companyCurrency)}</div>
+                            </div>
+                          </div>
+                          <div className="px-6 py-4 flex justify-between items-center bg-blue-50">
+                            <div>
+                              <div className="font-medium text-custom-grey">{t.totalAdjustments}</div>
+                              <div className="text-sm text-gray-500">{t.plusAdjustments}</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-custom-grey">{formatCurrency(companyResults.adjustments, companyCurrency)}</div>
+                            </div>
+                          </div>
+                          <div className="px-6 py-4 flex justify-between items-center bg-gray-50">
+                            <div>
+                              <div className="font-medium text-custom-grey">{t.taxableProfit}</div>
+                              <div className="text-sm text-gray-500">{t.grossProfit} {t.plusAdjustments}</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-custom-grey text-lg">{formatCurrency(companyResults.taxableProfit, companyCurrency)}</div>
                             </div>
                           </div>
                           <div className="px-6 py-4 flex justify-between items-center bg-gray-50">
@@ -677,6 +725,18 @@
                             <div className="text-xs text-gray-600">{t.smallBusinessDesc}</div>
                           </div>
                           <div className="bg-white rounded-lg p-3 border-2 border-custom-grey">
+                            <div className="font-semibold text-custom-grey mb-1">{t.mediumBusinessRate}</div>
+                            <div className="text-xs text-gray-600">{t.mediumBusinessDesc}</div>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 border-2 border-custom-grey">
+                            <div className="font-semibold text-custom-grey mb-1">{t.selfEmployedSmallRate}</div>
+                            <div className="text-xs text-gray-600">{t.selfEmployedSmallDesc}</div>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 border-2 border-custom-grey">
+                            <div className="font-semibold text-custom-grey mb-1">{t.selfEmployedLargeRate}</div>
+                            <div className="text-xs text-gray-600">{t.selfEmployedLargeDesc}</div>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 border-2 border-custom-grey">
                             <div className="font-semibold text-custom-grey mb-1">{t.luxuryHotelRate}</div>
                             <div className="text-xs text-gray-600">{t.luxuryHotelDesc}</div>
                           </div>
@@ -684,7 +744,7 @@
                         {companyIndustry === 'it' && (
                           <div className="mt-4 pt-4 border-t-2 border-custom-grey">
                             <p className="text-xs font-bold text-red-700 mb-2">{t.itNotice}</p>
-                            <p className="text-xs text-custom-grey">{t.itNoticeText}<br /><br /><strong>{t.affectedBusinesses}</strong> {t.itCompanies}</p>
+                            <p className="text-xs text-custom-grey">{t.itNoticeText}</p>
                           </div>
                         )}
                       </div>
