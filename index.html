@@ -239,19 +239,16 @@
             let inputAmount = parseFloat(grossSalary) || 0;
             let monthlyGross = period === 'annual' ? inputAmount / 12 : inputAmount;
             
-            let minBracket, maxBracket, incomeTaxBracket;
+            let minBracket, maxBracket;
             if (currency === 'ALL') {
               minBracket = 50000;
               maxBracket = 186416;
-              incomeTaxBracket = 170000;
             } else if (currency === 'EUR') {
               minBracket = 400;
               maxBracket = 1500;
-              incomeTaxBracket = 1400;
             } else { // USD
               minBracket = 450;
               maxBracket = 1650;
-              incomeTaxBracket = 1550;
             }
             
             const employeeHealth = monthlyGross * 0.017;
@@ -266,22 +263,24 @@
             }
             const employeeSocialSecurity = socialSecurityBase * 0.095;
             
-            const totalEmployeeContributions = employeeSocialSecurity + employeeHealth;
-            
             const employerSocialSecurity = socialSecurityBase * 0.15;
             const employerHealth = monthlyGross * 0.017;
             const totalEmployerContributions = employerSocialSecurity + employerHealth;
             
-            const taxableIncome = monthlyGross - totalEmployeeContributions;
-            
             let incomeTax = 0;
-            if (taxableIncome <= incomeTaxBracket) {
-              incomeTax = taxableIncome * 0.13;
+            if (monthlyGross > 200000) {
+              incomeTax = ((monthlyGross - 200000) * 0.23) + ((200000 - 30000) * 0.13);
+            } else if (monthlyGross > 60000) {
+              incomeTax = (monthlyGross - 30000) * 0.13;
+            } else if (monthlyGross > 50000) {
+              incomeTax = (monthlyGross - 35000) * 0.13;
             } else {
-              incomeTax = (incomeTaxBracket * 0.13) + ((taxableIncome - incomeTaxBracket) * 0.23);
+              incomeTax = 0;
             }
             
-            const netSalary = taxableIncome - incomeTax;
+            const totalEmployeeContributions = employeeSocialSecurity + employeeHealth;
+            const totalDeductions = totalEmployeeContributions + incomeTax;
+            const netSalary = monthlyGross - totalDeductions;
             const totalCost = monthlyGross + totalEmployerContributions;
             
             return {
@@ -293,7 +292,7 @@
                 totalEmployeeContributions,
                 incomeTax,
                 net: netSalary,
-                totalDeductions: totalEmployeeContributions + incomeTax,
+                totalDeductions: totalDeductions,
                 employerSocialSecurity,
                 employerHealth,
                 totalEmployerContributions,
@@ -447,7 +446,7 @@
                               <ul className="space-y-1 text-xs">
                                 <li>• {t.healthInsurance}: 1.7%</li>
                                 <li>• {t.socialSecurity}: 9.5% (bracket-based)</li>
-                                <li>• {t.incomeTax}: 13%, 23%</li>
+                                <li>• {t.incomeTax}: 0%, 13%, 23%</li>
                               </ul>
                             </div>
                           </div>
@@ -522,7 +521,7 @@
                             <div className="px-6 py-4 flex justify-between items-center">
                               <div>
                                 <div className="font-medium text-custom-grey">{t.incomeTax}</div>
-                                <div className="text-sm text-gray-500">{t.progressive}: 13% (0-170K) / 23% (>170K)</div>
+                                <div className="text-sm text-gray-500">{t.progressive}: 0% / 13% / 23%</div>
                               </div>
                               <div className="text-right">
                                 <div className="font-bold text-custom-grey">{formatCurrency(individualResults.monthly.incomeTax)}</div>
